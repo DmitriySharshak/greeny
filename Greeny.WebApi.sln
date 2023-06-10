@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33516.290
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Greeny.WebApi", "Greeny.WebApi\Greeny.WebApi.csproj", "{7A1446C4-0ACC-4F0A-901C-3F040190F824}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7A1446C4-0ACC-4F0A-901C-3F040190F824}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A1446C4-0ACC-4F0A-901C-3F040190F824}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A1446C4-0ACC-4F0A-901C-3F040190F824}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A1446C4-0ACC-4F0A-901C-3F040190F824}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {78085708-FC0B-4F0B-8007-4E0E7AE95B79}
+	EndGlobalSection
+EndGlobal

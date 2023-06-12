@@ -1,12 +1,12 @@
-﻿using LinqToDB;
+﻿using Greeny.Dal.Migration;
+using LinqToDB;
 using LinqToDB.Data;
 using LinqToDB.Mapping;
 using System.ComponentModel;
 using System.Data;
 using System.Reflection;
-using Greeny.Dal.Migration;
 
-namespace Gnivc.DataBus.Common.Dal.Migration
+namespace Greeny.Dal
 {
     /// <summary>
     /// Класс, флормирующий скрипты для создания или актуализации структуры таблиц
@@ -17,9 +17,10 @@ namespace Gnivc.DataBus.Common.Dal.Migration
         private bool dropObsoleteDbObjects = true;
         private DataConnection _connection;
         private string _schemaName;
-        public SchemaMigration(DataConnection connection)
+        public SchemaMigration(DataConnection connection, string schemaName)
         {
             _connection = connection;
+            _schemaName = schemaName;
         }
 
         public void CreateOrUpdateTable()

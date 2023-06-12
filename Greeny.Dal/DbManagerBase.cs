@@ -1,9 +1,7 @@
-﻿using Gnivc.DataBus.Common.Dal.Migration;
-using LinqToDB;
+﻿using LinqToDB;
 using LinqToDB.Data;
 using LinqToDB.DataProvider;
 using LinqToDB.DataProvider.PostgreSQL;
-using LinqToDB.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Greeny.Dal
@@ -20,14 +18,12 @@ namespace Greeny.Dal
 
         private DataConnection Connection { get; set; }
 
-        public DbManagerBase(IServiceProvider serviceCollection, bool requreNewConnection = false)
+        public DbManagerBase(IDataService dataService, bool requreNewConnection = false)
         {
             var connection = DbConnectionManager.Instance.PeekOrNull();
 
             if (connection == null || requreNewConnection)
             {
-                var dataService = serviceCollection.GetService<IDataService>();
-
                 var dbConnection = dataService.CreateDbConnection();
                 dbConnection.Open();
 
@@ -101,9 +97,9 @@ namespace Greeny.Dal
             return Connection.BulkCopy(options, source);
         }
 
-        public void Migrate<T>()
+        public void Migrate<T>(string schemaName)
         {
-            new SchemaMigration<T>(Connection).CreateOrUpdateTable();
+            new SchemaMigration<T>(Connection, schemaName).CreateOrUpdateTable();
         }
     }
 }

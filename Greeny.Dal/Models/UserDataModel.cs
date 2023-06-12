@@ -31,5 +31,10 @@ namespace Greeny.Dal.Models
         [Column(Name = "password", CanBeNull = false)]
         [Description("Пароль")]
         public virtual string Password { get; set; }
+
+        [NotNull]
+        [Column(Name = "register_time", CanBeNull = false)]
+        [Description("Дата регистрации")]
+        public virtual DateTime RegisterTime { get; set; }
     }
 }

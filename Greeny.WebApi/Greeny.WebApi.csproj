@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Greeny.Core\Greeny.Core.csproj" />
     <ProjectReference Include="..\Greeny.Dal\Greeny.Dal.csproj" />
   </ItemGroup>
 

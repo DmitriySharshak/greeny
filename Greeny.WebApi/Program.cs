@@ -1,4 +1,6 @@
 
+using Greeny.Core.Contract;
+using Greeny.Core.Services;
 using Greeny.Dal;
 using Greeny.WebApi.Services;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,7 +19,7 @@ namespace Greeny.WebApi
 
             var connectionString = builder.Configuration.GetValue<string>("GreenyConfig:ConnectionString");
             builder.Services.AddSingleton<IDataService>(new DefaultDataService(connectionString));
-
+            builder.Services.AddScoped<IUserDataService, UserDataService>();
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

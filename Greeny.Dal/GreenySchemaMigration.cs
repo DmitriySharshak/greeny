@@ -1,6 +1,5 @@
 ﻿using Greeny.Dal.Models;
 using LinqToDB;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 namespace Greeny.Dal
@@ -9,25 +8,24 @@ namespace Greeny.Dal
     {
         private const string DbVersionSettingName = "db_version";
 
-        private IServiceProvider _serviceProvider;
+        private IDataService _dataService;
         private ILogger _logger;
 
-        public GreenySchemaMigration(IServiceProvider serviceProvider)
+        public GreenySchemaMigration(IDataService dataService, ILoggerFactory loggerFactory)
         {
-            _serviceProvider = serviceProvider;
-            var loggerFactory = serviceProvider.GetRequiredService<ILoggerFactory>();
+            _dataService = dataService;
             _logger = loggerFactory.CreateLogger<GreenySchemaMigration>();
         }
 
         public void Migrate(GreenySchema db)
         {
-            db.Migrate<AppSettingsDataModel>();
-            db.Migrate<UserDataModel>();
+            db.Migrate<AppSettingsDataModel>(GreenySchema.SchemaName);
+            db.Migrate<UserDataModel>(GreenySchema.SchemaName);
         }
 
         public void CheckAndMigrate()
         {
-            using (var db = new GreenySchema(_serviceProvider))
+            using (var db = new GreenySchema(_dataService))
             {
                 if (IsSchemaActual(db))
                     return;

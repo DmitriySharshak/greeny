@@ -7,15 +7,15 @@ namespace Greeny.Dal
     {
         public const string SchemaName = "greeny";
 
-        public GreenySchema(IServiceProvider serviceCollection)
-            : base(serviceCollection)
+        public GreenySchema(IDataService dataService)
+            : base(dataService)
         {
 
         }
 
         public string Schema => GreenySchema.SchemaName;
 
-        public ITable<UserDataModel> Message
+        public ITable<UserDataModel> Users
         {
             get { return GetTable<UserDataModel>(); }
         }

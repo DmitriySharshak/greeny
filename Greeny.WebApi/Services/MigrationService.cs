@@ -7,15 +7,17 @@ namespace Greeny.WebApi.Services
     /// </summary>
     public class MigrationService
     {
-        private readonly IServiceProvider _services;
-        public MigrationService(IServiceProvider serviceProvider)
+        private readonly IDataService _dataService;
+        private readonly ILoggerFactory _loggerFactory;
+        public MigrationService(IDataService dataService, ILoggerFactory loggerFactory)
         {
-            _services = serviceProvider;
+            _dataService = dataService;
+            _loggerFactory = loggerFactory;
         }
 
         public void Migrate()
         {
-            var outboxSchemaMigration = new GreenySchemaMigration(_services);
+            var outboxSchemaMigration = new GreenySchemaMigration(_dataService, _loggerFactory);
             outboxSchemaMigration.CheckAndMigrate();
         }
     }

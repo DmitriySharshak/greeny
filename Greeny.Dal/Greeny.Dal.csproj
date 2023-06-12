@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="linq2db.PostgreSQL" Version="5.2.2" />
+    <PackageReference Include="Npgsql" Version="7.0.4" />
   </ItemGroup>
 
   <ItemGroup>
@@ -15,6 +16,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="Microsoft.Extensions.Configuration.Abstractions">
+      <HintPath>..\..\..\..\Program Files (x86)\dotnet\shared\Microsoft.AspNetCore.App\7.0.4\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions">
       <HintPath>..\..\..\..\Program Files\dotnet\packs\Microsoft.AspNetCore.App.Ref\7.0.4\ref\net7.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
     </Reference>

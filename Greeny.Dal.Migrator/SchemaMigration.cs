@@ -17,22 +17,13 @@ namespace Gnivc.DataBus.Common.Dal.Migration
         private bool dropObsoleteDbObjects = true;
         private DataConnection _connection;
         private string _schemaName;
-        public SchemaMigration(DataConnection connection, string schemaName)
+        public SchemaMigration(DataConnection connection)
         {
             _connection = connection;
-            _schemaName = schemaName;
         }
-
 
         public void CreateOrUpdateTable()
         {
-            //Проверим существование схемы и при необходимости создадим
-            if (!IsSchemaExists())
-            {
-                var sql = @"CREATE SCHEMA " + _schemaName;
-                ExecuteSql(sql);
-            }
-
             var tableName = GetTableName();
 
             // Получаем список всех колонок, описанных в классе - дата модели

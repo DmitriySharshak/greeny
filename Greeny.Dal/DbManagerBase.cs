@@ -3,6 +3,7 @@ using LinqToDB;
 using LinqToDB.Data;
 using LinqToDB.DataProvider;
 using LinqToDB.DataProvider.PostgreSQL;
+using LinqToDB.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Greeny.Dal
@@ -12,14 +13,14 @@ namespace Greeny.Dal
     // Возможно это из за кэша внутри студии. Пока обошел, создав свой класс
     class PostgreSQLDataProvider93 : PostgreSQLDataProvider { public PostgreSQLDataProvider93() : base(ProviderName.PostgreSQL93, PostgreSQLVersion.v93) { } }
 
-    public class DbManagerBase : IDisposable
+    public abstract class DbManagerBase : IDisposable
     {
         private static IDataProvider dataProvider = new PostgreSQLDataProvider93();
         private bool isOuterConnection = false;
 
         private DataConnection Connection { get; set; }
 
-        public DbManagerBase(IServiceProvider serviceCollection, string moduleName, string schemaName, string objectName, bool requreNewConnection = false)
+        public DbManagerBase(IServiceProvider serviceCollection, bool requreNewConnection = false)
         {
             var connection = DbConnectionManager.Instance.PeekOrNull();
 
@@ -100,9 +101,9 @@ namespace Greeny.Dal
             return Connection.BulkCopy(options, source);
         }
 
-        public void Migrate<T>(string schemaName)
+        public void Migrate<T>()
         {
-            new SchemaMigration<T>(Connection, schemaName).CreateOrUpdateTable();
+            new SchemaMigration<T>(Connection).CreateOrUpdateTable();
         }
     }
 }

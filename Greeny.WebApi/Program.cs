@@ -1,4 +1,8 @@
 
+using Greeny.Dal;
+using Greeny.WebApi.Services;
+using Microsoft.Extensions.DependencyInjection;
+
 namespace Greeny.WebApi
 {
     public class Program
@@ -9,12 +13,21 @@ namespace Greeny.WebApi
 
             // Add services to the container.
 
+            builder.Services.AddSingleton(typeof(MigrationService));
+
+            var connectionString = builder.Configuration.GetValue<string>("GreenyConfig:ConnectionString");
+            builder.Services.AddSingleton<IDataService>(new DefaultDataService(connectionString));
+
+
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
+
+            var migration = (MigrationService)app.Services.GetService(typeof(MigrationService))!;
+            migration.Migrate();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
@@ -30,6 +43,9 @@ namespace Greeny.WebApi
             app.MapControllers();
 
             app.Run();
+
+            
+
         }
     }
 }

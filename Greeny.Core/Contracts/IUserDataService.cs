@@ -13,13 +13,12 @@ namespace Greeny.Core.Contract
         /// </summary>
         /// <param name="id">идентификатор пользователя</param>
         /// <returns></returns>
-        UserModel? Get(long id);
-
+        Task<UserModel?> GetAsync(long id);
 
         /// <summary>
-        /// Получить список всех пользователей
+        /// Получить список всех пользователей системы
         /// </summary>
         /// <returns></returns>
-        IEnumerable<UserModel> GetAll();
+        Task<IEnumerable<UserModel>> ListAsync();
     }
 }

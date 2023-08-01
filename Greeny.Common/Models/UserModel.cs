@@ -1,4 +1,6 @@
-﻿namespace Greeny.Common.Models
+﻿using Greeny.Common.Enums;
+
+namespace Greeny.Common.Models
 {
     /// <summary>
     /// Пользователь сервиса
@@ -6,15 +8,29 @@
     public sealed class UserModel
     {
         /// <summary>
-        /// Идентификатор пользователя
+        /// Идентификатор
         /// </summary>
         public long Id { get; set; }
 
         /// <summary>
-        /// Полное имя пользователя
+        /// Тип 
         /// </summary>
-        public string FullName { get; set; }
+        public UserType Type { get; set; }
 
+        /// <summary>
+        /// Имя
+        /// </summary>
+        public string FirstName { get; set; }
+
+        /// <summary>
+        /// Фамилия
+        /// </summary>
+        public string LastName { get; set; }
+
+        /// <summary>
+        /// Отчество
+        /// </summary>
+        public string MiddleName { get; set; }
         /// <summary>
         /// Адрес электронной почты
         /// </summary>

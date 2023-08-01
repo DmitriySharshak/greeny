@@ -2,7 +2,6 @@
 using LinqToDB.Data;
 using LinqToDB.DataProvider;
 using LinqToDB.DataProvider.PostgreSQL;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Greeny.Dal
 {

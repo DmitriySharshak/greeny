@@ -13,6 +13,11 @@ namespace Greeny.Dal.Models
         public virtual long Id { get; set; }
 
         [NotNull]
+        [Column(Name = "type", CanBeNull = false)]
+        [Description("тип")]
+        public virtual int Type { get; set; }
+
+        [NotNull]
         [Column(Name = "phone_number", CanBeNull = false)]
         [Description("Номер телефона")]
         public virtual string PhoneNumber { get; set; }
@@ -23,9 +28,19 @@ namespace Greeny.Dal.Models
         public virtual string Email { get; set; }
 
         [NotNull]
-        [Column(Name = "full_name", CanBeNull = false)]
-        [Description("Полное имя")]
-        public virtual string FullName { get; set; }
+        [Column(Name = "first_name", CanBeNull = false)]
+        [Description("Имя")]
+        public virtual string FirstName { get; set; }
+
+        [NotNull]
+        [Column(Name = "middle_name", CanBeNull = false)]
+        [Description("Отчество")]
+        public virtual string MiddleName { get; set; }
+
+        [NotNull]
+        [Column(Name = "last_name", CanBeNull = false)]
+        [Description("Фамилия")]
+        public virtual string LastName { get; set; }
 
         [NotNull]
         [Column(Name = "password", CanBeNull = false)]

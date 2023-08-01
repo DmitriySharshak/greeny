@@ -14,11 +14,17 @@ public class UserController : ControllerBase
         _userDataService = userDataService;
     }
 
-    [HttpGet(Name = "users")]
-    public IEnumerable<UserModel> GetList()
+    [HttpGet(Name = "user")]
+    public async Task<UserModel?> Get(long id)
     {
-        return _userDataService.GetAll();
+        return await _userDataService.GetAsync(id);
     }
+
+    //[HttpGet(Name = "userssss")]
+    //public async Task<IEnumerable<UserModel>> List()
+    //{
+    //    return await _userDataService.ListAsync();
+    //}
 
 
 }

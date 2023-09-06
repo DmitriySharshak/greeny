@@ -21,6 +21,7 @@ namespace Greeny.Dal
         {
             db.Migrate<AppSettingsDataModel>(GreenySchema.SchemaName);
             db.Migrate<UserDataModel>(GreenySchema.SchemaName);
+            db.Migrate<CategoryDataModel>(GreenySchema.SchemaName);
         }
 
         public void CheckAndMigrate()

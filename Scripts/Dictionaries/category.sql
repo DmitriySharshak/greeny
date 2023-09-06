@@ -1,0 +1,4 @@
+﻿INSERT INTO category( DCTT_IS_NSI, dctt_id, dctt_name)   VALUES ( 1,'c9b71c12-8305-4311-ad8e-63e1a9c31d1a', 'ОКПД2 (Общероссийский классификатор продукции по видам экономической деятельности)');
+INSERT INTO dict_types( DCTT_IS_NSI, dctt_id, dctt_name)   VALUES ( 1,'68386b48-6d17-4e76-b08b-d0c3fa36e20b', 'ОКП (Общероссийский классификатор продукции)');
+INSERT INTO dict_types( DCTT_IS_NSI, dctt_id, dctt_name)   VALUES ( 1,'de9a3564-7fde-453c-ac6a-6ef991de9ed0', 'ОКВЭД2 (Общероссийский классификатор видов экономической деятельности)');
+INSERT INTO dict_types( DCTT_IS_NSI, dctt_id, dctt_name)   VALUES ( 1,'e57848d9-2f40-44ea-ab0a-39edfdfee1dd', 'ЕКПС (Единый кодификатор предметов снабжения для федеральных государственных нужд)');

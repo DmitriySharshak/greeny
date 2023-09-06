@@ -20,6 +20,11 @@ namespace Greeny.Dal
             get { return GetTable<UserDataModel>(); }
         }
 
+        public ITable<CategoryDataModel> Category
+        {
+            get { return GetTable<CategoryDataModel>(); }
+        }
+
         public ITable<AppSettingsDataModel> AppSettings
         {
             get { return GetTable<AppSettingsDataModel>(); }

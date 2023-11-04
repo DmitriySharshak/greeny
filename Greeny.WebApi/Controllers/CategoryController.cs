@@ -4,8 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Greeny.WebApi.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/v1/[controller]")]
+    [Produces("application/json")]
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryDataService _categoryDataService;
@@ -14,7 +15,7 @@ namespace Greeny.WebApi.Controllers
             _categoryDataService = categoryDataService;
         }
 
-        [HttpGet(Name = "list")]
+        [HttpGet("list")]
         public async Task<IEnumerable<CategoryModel>> GetList()
         {
             return await _categoryDataService.GetList();

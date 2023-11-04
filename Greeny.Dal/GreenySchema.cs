@@ -5,7 +5,7 @@ namespace Greeny.Dal
 {
     public class GreenySchema : DbManagerBase
     {
-        public const string SchemaName = "greeny";
+        public const string SchemaName = "greenyfarm";
 
         public GreenySchema(IDataService dataService)
             : base(dataService)

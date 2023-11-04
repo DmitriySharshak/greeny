@@ -5,7 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace Greeny.WebApi.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/v1/[controller]")]
+[Produces("application/json")]
 public class UserController : ControllerBase
 {
     private readonly IUserDataService _userDataService;

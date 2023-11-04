@@ -9,9 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Greeny.Dal", "Greeny.Dal\Gr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Greeny.Dal.Migrator", "Greeny.Dal.Migrator\Greeny.Dal.Migrator.csproj", "{E2FF4F59-BF15-4680-982A-02DC864FB288}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Greeny.Core", "Greeny.Core\Greeny.Core.csproj", "{207EDB44-9560-417B-99CF-C4509A9BEEA6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Greeny.Core", "Greeny.Core\Greeny.Core.csproj", "{207EDB44-9560-417B-99CF-C4509A9BEEA6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Greeny.Common", "Greeny.Common\Greeny.Common.csproj", "{55E927B4-5366-474F-89D3-E2D14CFBBC0A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Greeny.Common", "Greeny.Common\Greeny.Common.csproj", "{55E927B4-5366-474F-89D3-E2D14CFBBC0A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

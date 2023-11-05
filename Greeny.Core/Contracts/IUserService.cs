@@ -5,7 +5,7 @@ namespace Greeny.Core.Contract
     /// <summary>
     /// Контракт предоставляет методы для управления пользователями системы
     /// </summary>
-    public interface IUserDataService
+    public interface IUserService
     {
         /// <summary>
         /// Получить информацию о пользвателе

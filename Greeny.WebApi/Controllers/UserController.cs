@@ -9,22 +9,22 @@ namespace Greeny.WebApi.Controllers;
 [Produces("application/json")]
 public class UserController : ControllerBase
 {
-    private readonly IUserDataService _userDataService;
-    public UserController(IUserDataService userDataService)
+    private readonly IUserService _userService;
+    public UserController(IUserService userService)
     {
-        _userDataService = userDataService;
+        _userService = userService;
     }
 
     [HttpGet(Name = "user")]
     public async Task<UserModel?> Get(long id)
     {
-        return await _userDataService.GetAsync(id);
+        return await _userService.GetAsync(id);
     }
 
     //[HttpGet(Name = "userssss")]
     //public async Task<IEnumerable<UserModel>> List()
     //{
-    //    return await _userDataService.ListAsync();
+    //    return await _userService.ListAsync();
     //}
 
 

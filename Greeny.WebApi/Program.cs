@@ -1,12 +1,7 @@
+using Greeny.WebApi.Extensions;
 using Greeny.WebApi.Services;
 using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.Extensions.Configuration;
-using System.Diagnostics;
 using System.Reflection;
-using Greeny.Core.Contract;
-using Greeny.Core.Contracts;
-using Greeny.Core.Services;
-using Greeny.Dal;
 
 namespace Greeny.WebApi
 {
@@ -15,6 +10,7 @@ namespace Greeny.WebApi
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            
             builder.WebHost.ConfigureKestrel(serverOptions =>
             {
                 serverOptions.ConfigureHttpsDefaults(configureOptions =>
@@ -40,21 +36,19 @@ namespace Greeny.WebApi
             builder.Configuration.AddJsonFile(Path.Combine(assemblyDirectory, $"appsettings.{builder.Environment.EnvironmentName}.json"), optional: true,
                 reloadOnChange: true);
 
-            builder.Services.AddSingleton(typeof(MigrationService));
+            
             builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("GreenyFarm"));
 
             var version = builder.Configuration.GetValue<string>("Version");
             Console.WriteLine($"version = {version}");
-
-            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-            builder.Services.AddSingleton<IDataService>(new DefaultDataService(connectionString: connectionString));
-            builder.Services.AddScoped<IUserDataService, UserDataService>();
-            builder.Services.AddScoped<ICategoryDataService, CategoryDataService>();
-
-            builder.Services.AddControllers();  
-            //// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            
+            builder.Services
+                .AddCache(builder)
+                .RegisterServices()
+                .RegisterDbConnections(builder.Configuration)
+                .AddEndpointsApiExplorer() //// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+                .AddSwaggerGen()
+                .AddControllers();
 
             var app = builder.Build();
 

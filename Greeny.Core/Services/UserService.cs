@@ -5,10 +5,10 @@ using LinqToDB;
 
 namespace Greeny.Core.Services
 {
-    public sealed class UserDataService: IUserDataService
+    public sealed class UserService: IUserService
     {
         private readonly IDataService _dataService;
-        public UserDataService(IDataService dataService)
+        public UserService(IDataService dataService)
         {
             if(dataService == null) throw  new ArgumentNullException(nameof(dataService));
 

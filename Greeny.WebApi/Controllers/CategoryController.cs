@@ -9,16 +9,16 @@ namespace Greeny.WebApi.Controllers
     [Produces("application/json")]
     public class CategoryController : ControllerBase
     {
-        private readonly ICategoryDataService _categoryDataService;
-        public CategoryController(ICategoryDataService categoryDataService)
+        private readonly ICategoryService _categoryService;
+        public CategoryController(ICategoryService categoryService)
         {
-            _categoryDataService = categoryDataService;
+            _categoryService = categoryService;
         }
 
         [HttpGet("list")]
-        public async Task<IEnumerable<CategoryModel>> GetList()
+        public async Task<IEnumerable<CategoryModel>?> GetList()
         {
-            return await _categoryDataService.GetList();
+            return await _categoryService.GetListAsync();
         }
     }
 }

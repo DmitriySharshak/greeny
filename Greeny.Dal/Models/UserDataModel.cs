@@ -51,5 +51,10 @@ namespace Greeny.Dal.Models
         [Column(Name = "register_time", CanBeNull = false)]
         [Description("Дата регистрации")]
         public virtual DateTime RegisterTime { get; set; }
+
+        [NotNull]
+        [Column(Name = "is_active")]
+        [Description("Признак активности пользователя")]
+        public virtual bool IsActive { get; set; }
     }
 }

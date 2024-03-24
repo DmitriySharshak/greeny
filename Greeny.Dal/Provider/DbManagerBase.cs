@@ -1,21 +1,23 @@
-﻿using LinqToDB;
+﻿using Greeny.Dal.Models;
+using LinqToDB;
 using LinqToDB.Data;
 using LinqToDB.DataProvider;
 using LinqToDB.DataProvider.PostgreSQL;
+using System.Data.Common;
 
-namespace Greeny.Dal
+namespace Greeny.Dal.Provider
 {
     // TODO: Почему то попытка использовать существующий PostgreSQLDataProvider93 из linq2db приводит к ошибке
     // Error CS0122  'PostgreSQLDataProvider93' is inaccessible due to its protection level
     // Возможно это из за кэша внутри студии. Пока обошел, создав свой класс
     class PostgreSQLDataProvider93 : PostgreSQLDataProvider { public PostgreSQLDataProvider93() : base(ProviderName.PostgreSQL93, PostgreSQLVersion.v93) { } }
 
-    public abstract class DbManagerBase : IDisposable
+    public abstract class DbManagerBase : ISchema, IDisposable
     {
         private static IDataProvider dataProvider = new PostgreSQLDataProvider93();
         private bool isOuterConnection = false;
 
-        private DataConnection Connection { get; set; }
+        private readonly DataConnection _connection; 
 
         public DbManagerBase(IDataService dataService, bool requreNewConnection = false)
         {
@@ -37,8 +39,14 @@ namespace Greeny.Dal
                 isOuterConnection = false;
             }
 
-            Connection = connection;
+            _connection = connection;
         }
+
+        public ITable<AppSettingsDataModel> AppSettings => GetTable<AppSettingsDataModel>();
+        
+        public abstract string Name { get; }
+
+        public DataConnection Connection => _connection;
 
         public void Dispose()
         {
@@ -96,9 +104,9 @@ namespace Greeny.Dal
             return Connection.BulkCopy(options, source);
         }
 
-        public void Migrate<T>(string schemaName)
+        public void Migrate()
         {
-            new SchemaMigration<T>(Connection, schemaName).CreateOrUpdateTable();
+            new SchemaMigration(this).Migrate();
         }
     }
 }

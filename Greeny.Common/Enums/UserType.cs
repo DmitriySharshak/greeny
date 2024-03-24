@@ -2,14 +2,13 @@
 {
     public enum UserType
     {
-        /// <summary>
-        /// Поставщик
-        /// </summary>
-        Supplier = 0,
+        [Description("Фермер")]
+        Farmer = 1,
 
-        /// <summary>
-        /// Клиент
-        /// </summary>
-        Сustomer = 1
+        [Description("Клиент")]
+        Сustomer = 2,
+
+        [Description("Водитель")]
+        Driver = 3,
     }
 }

@@ -1,12 +1,12 @@
 ﻿using Npgsql;
 using System.Data.Common;
 
-namespace Greeny.Dal
+namespace Greeny.Dal.Provider
 {
-    public class DefaultDataService: IDataService
+    public class NpqsqlDataService : IDataService
     {
         private readonly string _dbConnectionString;
-        public DefaultDataService(string connectionString)
+        public NpqsqlDataService(string connectionString)
         {
             if (string.IsNullOrWhiteSpace(connectionString)) throw new ArgumentNullException(nameof(connectionString));
 

@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Greeny.WebApi", "Greeny.Web
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Greeny.Dal", "Greeny.Dal\Greeny.Dal.csproj", "{3ACC6E77-AFEB-43CB-BE85-C43EB8C47311}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Greeny.Dal.Migrator", "Greeny.Dal.Migrator\Greeny.Dal.Migrator.csproj", "{E2FF4F59-BF15-4680-982A-02DC864FB288}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Greeny.Core", "Greeny.Core\Greeny.Core.csproj", "{207EDB44-9560-417B-99CF-C4509A9BEEA6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Greeny.Common", "Greeny.Common\Greeny.Common.csproj", "{55E927B4-5366-474F-89D3-E2D14CFBBC0A}"
@@ -27,10 +25,6 @@ Global
 		{3ACC6E77-AFEB-43CB-BE85-C43EB8C47311}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3ACC6E77-AFEB-43CB-BE85-C43EB8C47311}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3ACC6E77-AFEB-43CB-BE85-C43EB8C47311}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E2FF4F59-BF15-4680-982A-02DC864FB288}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E2FF4F59-BF15-4680-982A-02DC864FB288}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E2FF4F59-BF15-4680-982A-02DC864FB288}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E2FF4F59-BF15-4680-982A-02DC864FB288}.Release|Any CPU.Build.0 = Release|Any CPU
 		{207EDB44-9560-417B-99CF-C4509A9BEEA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{207EDB44-9560-417B-99CF-C4509A9BEEA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{207EDB44-9560-417B-99CF-C4509A9BEEA6}.Release|Any CPU.ActiveCfg = Release|Any CPU

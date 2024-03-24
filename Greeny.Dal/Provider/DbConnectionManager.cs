@@ -1,8 +1,6 @@
 ﻿using LinqToDB.Data;
-using System.Collections.Generic;
-using System.Threading;
 
-namespace Greeny.Dal
+namespace Greeny.Dal.Provider
 {
     // Позволяет переиспользовать один DataConnection при обращении к БД из вложенных методов.
     // При использовании этого класса исключается ошибка 55000: prepared transactions are disabled

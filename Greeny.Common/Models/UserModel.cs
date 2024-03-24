@@ -18,19 +18,20 @@ namespace Greeny.Common.Models
         public UserType Type { get; set; }
 
         /// <summary>
-        /// Имя
-        /// </summary>
-        public string FirstName { get; set; }
-
-        /// <summary>
         /// Фамилия
         /// </summary>
         public string LastName { get; set; }
 
         /// <summary>
+        /// Имя
+        /// </summary>
+        public string FirstName { get; set; }
+
+        /// <summary>
         /// Отчество
         /// </summary>
-        public string MiddleName { get; set; }
+        public string? MiddleName { get; set; }
+        
         /// <summary>
         /// Адрес электронной почты
         /// </summary>
@@ -42,8 +43,18 @@ namespace Greeny.Common.Models
         public string PhoneNumber { get; set; }
 
         /// <summary>
+        /// Адрес
+        /// </summary>
+        public string Address { get; set; }
+
+        /// <summary>
         /// Дата регистрации
         /// </summary>
         public DateTime RegisterTime { get; set; }
+
+        /// <summary>
+        /// Признак активности пользователя
+        /// </summary>
+        public bool IsActive { get; set; }
     }
 }

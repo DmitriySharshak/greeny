@@ -3,8 +3,8 @@ using System.ComponentModel;
 
 namespace Greeny.Dal.Models
 {
-    [Table(Name = "app_settings", Schema = GreenySchema.SchemaName)]
-    [Description("")]
+    [Table(Name = "app_settings")]
+    [Description("Настройки")]
     public class AppSettingsDataModel
     {
         [PrimaryKey, Identity]

@@ -1,5 +1,4 @@
 using Greeny.WebApi.Extensions;
-using Greeny.WebApi.Services;
 using Microsoft.AspNetCore.HttpOverrides;
 using System.Reflection;
 
@@ -37,14 +36,12 @@ namespace Greeny.WebApi
                 reloadOnChange: true);
 
             
-            builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("GreenyFarm"));
-
             var version = builder.Configuration.GetValue<string>("Version");
-            Console.WriteLine($"version = {version}");
+            Console.WriteLine($"app version: {version}");
             
             builder.Services
                 .AddCache(builder)
-                .RegisterServices()
+                .RegisterServices(builder)
                 .RegisterDbConnections(builder.Configuration)
                 .AddEndpointsApiExplorer() //// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
                 .AddSwaggerGen()
@@ -57,9 +54,6 @@ namespace Greeny.WebApi
                 ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
             });
 
-            var migration = (MigrationService)app.Services.GetService(typeof(MigrationService))!;
-            migration.Migrate();
-
             // Configure the HTTP request pipeline.
             if (builder.Environment.IsDevelopment())
             {
@@ -68,21 +62,15 @@ namespace Greeny.WebApi
             }
 
             // Отключаем перенаправления HTTPS в среде разработки
-            if (!builder.Environment.IsDevelopment())
-            {
-                app.UseHttpsRedirection();
-            }
+            //if (!builder.Environment.IsDevelopment())
+            //{
+            //    app.UseHttpsRedirection();
+            //}
 
             app.UseAuthorization();
-
             app.MapControllers();
-            
             app.MapGet("/", () => "Hello ForwardedHeadersOptions!");
-
             app.Run();
-
-            
-
         }
     }
 }

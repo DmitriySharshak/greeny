@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Greeny.Common.Models
+﻿namespace Greeny.Common.Models
 {
     /// <summary>
     /// Категория продукции
@@ -17,8 +11,18 @@ namespace Greeny.Common.Models
         public long Id { get; set; }
 
         /// <summary>
+        /// Родительская категория
+        /// </summary>
+        public long? ParentId { get;set; }
+
+        /// <summary>
         /// Наименование категории
         /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// Изображение в формате base 64
+        /// </summary>
+        public string Image { get; set; }
     }
 }

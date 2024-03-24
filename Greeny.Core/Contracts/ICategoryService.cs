@@ -5,9 +5,16 @@ namespace Greeny.Core.Contracts
     public interface ICategoryService
     {
         /// <summary>
-        /// Получить список всех доступных категорий продукции
+        /// Получить список категорий продукции верхнего уровня 
         /// </summary>
         /// <returns></returns>
-        Task<IEnumerable<CategoryModel>?> GetListAsync();
+        Task<IEnumerable<CategoryModel>?> GetRootAsync();
+
+        /// <summary>
+        /// Получить список вложенных категорий продукции
+        /// </summary>
+        /// <param name="id">Идентификатор категории</param>
+        /// <returns></returns>
+        Task<IEnumerable<CategoryModel>?> GetChildrenAsync(long id);
     }
 }

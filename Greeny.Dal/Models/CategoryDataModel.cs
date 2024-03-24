@@ -4,7 +4,7 @@ using System.ComponentModel;
 namespace Greeny.Dal.Models
 {
     [Table(Name = "category", Schema = GreenySchema.SchemaName)]
-    [Description("")]
+    [Description("Категория товара")]
     public class CategoryDataModel
     {
         [PrimaryKey, Identity]
@@ -12,9 +12,23 @@ namespace Greeny.Dal.Models
         [Description("Id")]
         public virtual long Id { get; set; }
 
+        [Column(Name = "parent_id")]
+        [Description("Родительская категория")]
+        public virtual long? ParentId { get; set; }
+
         [NotNull]
         [Column(Name = "name", CanBeNull = false)]
         [Description("Наименование")]
         public virtual string Name { get; set; }
+
+        [NotNull]
+        [Column(Name = "image", CanBeNull = false)]
+        [Description("Путь к файлу изображения")]
+        public virtual string Image { get; set; }
+
+        [NotNull]
+        [Column(Name = "show", CanBeNull = false)]
+        [Description("Показывать категорию")]
+        public virtual bool Show { get; set; }
     }
 }

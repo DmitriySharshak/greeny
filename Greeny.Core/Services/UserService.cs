@@ -1,6 +1,7 @@
 ﻿using Greeny.Common.Models;
 using Greeny.Core.Contract;
 using Greeny.Dal;
+using Greeny.Dal.Provider;
 using LinqToDB;
 
 namespace Greeny.Core.Services

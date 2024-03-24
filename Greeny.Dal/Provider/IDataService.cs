@@ -1,6 +1,6 @@
 ﻿using System.Data.Common;
 
-namespace Greeny.Dal
+namespace Greeny.Dal.Provider
 {
     public interface IDataService
     {

@@ -18,13 +18,13 @@ namespace Greeny.WebApi.Controllers
         [HttpGet()]
         public async Task<IEnumerable<CategoryModel>?> Get()
         {
-            return await _categoryService.GetRootAsync();
+            return await _categoryService.GetRootsAsync();
         }
 
-        [HttpGet("{id}/children")]
+        [HttpGet("{id}/childrens")]
         public async Task<IEnumerable<CategoryModel>?> GetSubCategories(long id)
         {
-            return await _categoryService.GetChildrenAsync(id);
+            return await _categoryService.GetChildrensAsync(id);
         }
     }
 }

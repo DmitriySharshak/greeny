@@ -15,16 +15,25 @@ namespace Greeny.WebApi.Controllers
             _categoryService = categoryService;
         }
 
+        /// <summary>
+        /// Получить список корневых категорий товаров
+        /// </summary>
+        /// <returns></returns>
         [HttpGet()]
-        public async Task<IEnumerable<CategoryModel>?> Get()
+        public async Task<IEnumerable<CategoryModel>?> GetRoots()
         {
             return await _categoryService.GetRootsAsync();
         }
 
-        [HttpGet("{id}/childrens")]
-        public async Task<IEnumerable<CategoryModel>?> GetSubCategories(long id)
+        /// <summary>
+        /// Получить список потомков для родительской категории 
+        /// </summary>
+        /// <param name="id">Идентификатор родительской категории</param>
+        /// <returns></returns>
+        [HttpGet("{id}/descendants")]
+        public async Task<IEnumerable<CategoryModel>?> GetDescendants(long id)
         {
-            return await _categoryService.GetChildrensAsync(id);
+            return await _categoryService.GetDescendantsAsync(id);
         }
     }
 }

@@ -8,13 +8,13 @@ namespace Greeny.Core.Contracts
         /// Получить список категорий продукции верхнего уровня 
         /// </summary>
         /// <returns></returns>
-        Task<IEnumerable<CategoryModel>?> GetRootsAsync();
+        Task<IEnumerable<CategoryModel>> GetRootsAsync();
 
         /// <summary>
         /// Получить список вложенных категорий продукции
         /// </summary>
         /// <param name="id">Идентификатор категории</param>
         /// <returns></returns>
-        Task<IEnumerable<CategoryModel>?> GetChildrensAsync(long id);
+        Task<IEnumerable<CategoryModel>> GetDescendantsAsync(long id);
     }
 }

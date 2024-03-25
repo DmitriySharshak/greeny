@@ -20,7 +20,7 @@ namespace Greeny.Core.Services
             //_cache = cache;
         }
 
-        public async Task<IEnumerable<CategoryModel>?> GetRootAsync()
+        public async Task<IEnumerable<CategoryModel>> GetRootsAsync()
         {
             try
             {
@@ -40,7 +40,7 @@ namespace Greeny.Core.Services
                             Id = q.Id,
                             Name = q.Name,
                             ParentId = q.ParentId,
-                            Image = _fileManagerService.GetFile(q.Image)
+                            Image = _fileManagerService.GetFile(q.ImagePath)
                         }).ToListAsync();
 
                     //var valueSerialize = JsonSerializer.Serialize(result);
@@ -61,7 +61,7 @@ namespace Greeny.Core.Services
             }
         }
 
-        public async Task<IEnumerable<CategoryModel>?> GetChildrenAsync(long id)
+        public async Task<IEnumerable<CategoryModel>> GetDescendantsAsync(long id)
         {
             try
             {
@@ -73,7 +73,7 @@ namespace Greeny.Core.Services
                             Id = q.Id,
                             Name = q.Name,
                             ParentId = q.ParentId,
-                            Image = _fileManagerService.GetFile(q.Image)
+                            Image = _fileManagerService.GetFile(q.ImagePath)
                         }).ToListAsync();
 
                     return await result;

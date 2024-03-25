@@ -22,9 +22,9 @@ namespace Greeny.Dal.Models
         public virtual string Name { get; set; }
 
         [NotNull]
-        [Column(Name = "image", CanBeNull = false)]
+        [Column(Name = "image_path", CanBeNull = false)]
         [Description("Путь к файлу изображения")]
-        public virtual string Image { get; set; }
+        public virtual string ImagePath { get; set; }
 
         [NotNull]
         [Column(Name = "show", CanBeNull = false)]

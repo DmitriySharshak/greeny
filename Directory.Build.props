@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+
+	<PropertyGroup>
+
+		<!-- Свойства по умолчанию для всех проектов -->
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    
+		<!-- Версии сборок по умолчанию для всех проектов -->
+		<AssemblyVersion>1.0.0.0</AssemblyVersion>
+		<!-- Версия подсистемы (применится как файловая версия сборок подсистемы) -->
+		<SubsystemProductVersion>24.04.15.0</SubsystemProductVersion>
+		
+		<!-- Версии файлов сборок по умолчанию для всех проектов -->
+		<FileVersion>$(SubsystemProductVersion)</FileVersion>
+		<InformationalVersion>$(SubsystemProductVersion)</InformationalVersion>
+
+		<!-- Свойства по умолчанию для всех NuGet-пакетов -->
+		<Authors>Greeny Team</Authors>
+		<Company>Greeny</Company>
+		<Product>Greeny</Product>
+		<Copyright>Greeny</Copyright>
+	</PropertyGroup>
+
+</Project>

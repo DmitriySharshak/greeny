@@ -8,6 +8,21 @@ namespace Greeny.Core.Contract
     public interface IUserService
     {
         /// <summary>
+        /// Авторизация пользователя
+        /// </summary>
+        /// <param name="phone"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        Task<UserModel?> GetAsync(string phone, string password);
+
+        /// <summary>
+        /// Добавление нового пользователя
+        /// </summary>
+        /// <param name="newUser"></param>
+        /// <returns></returns>
+        Task<bool> AddAsync(UserRegisterModel newUser);
+
+        /// <summary>
         /// Получить информацию о пользвателе
         /// по его идентификатору
         /// </summary>

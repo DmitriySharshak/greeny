@@ -16,7 +16,7 @@ namespace Greeny.Dal
 
         public override string Name => SchemaName;
 
-        public ITable<UserDataModel> Users { get { return GetTable<UserDataModel>(); } }
+        public ITable<UserDataModel> User { get { return GetTable<UserDataModel>(); } }
         public ITable<CategoryDataModel> Category { get { return GetTable<CategoryDataModel>(); } }
     }
 }

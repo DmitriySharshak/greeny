@@ -1,12 +1,13 @@
 ﻿using Greeny.Common.Models;
 using Greeny.Core.Contract;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.Mime;
 
 namespace Greeny.WebApi.Controllers;
 
 [ApiController]
-[Route("api/v1/[controller]")]
-[Produces("application/json")]
+[Route("api/v1/users")]
+[Produces(MediaTypeNames.Application.Json)]
 public class UserController : ControllerBase
 {
     private readonly IUserService _userService;
@@ -15,17 +16,19 @@ public class UserController : ControllerBase
         _userService = userService;
     }
 
-    [HttpGet(Name = "user")]
-    public async Task<UserModel?> Get(long id)
+
+    [HttpPost("login")]
+    public async Task<ActionResult<UserModel?>> Login(string login, string password)
     {
-        return await _userService.GetAsync(id);
+        return await _userService.GetAsync(login, password);
     }
 
-    //[HttpGet(Name = "userssss")]
-    //public async Task<IEnumerable<UserModel>> List()
-    //{
-    //    return await _userService.ListAsync();
-    //}
+
+    [HttpPost("register")]
+    public async Task<ActionResult<bool>> Register(UserRegisterModel user)
+    {
+        return await _userService.AddAsync(user);
+    }
 
 
 }

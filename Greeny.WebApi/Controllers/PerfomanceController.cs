@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Net.Mime;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Greeny.WebApi.Controllers
@@ -7,8 +8,10 @@ namespace Greeny.WebApi.Controllers
     /// Контроллер для проведения нагрузочного тестирования
     /// </summary>
     [ApiController]
-    [Route("api/v1/perfomance")]
-    [Produces("application/json")]
+    [Route("api/v{version:apiVersion}/perfomance")]
+    [Produces(MediaTypeNames.Application.Json)]
+    [ApiVersion("1.0")]
+
     public class PerfomanceController : Controller
     {
         private static readonly Stopwatch _stopwatch = Stopwatch.StartNew();

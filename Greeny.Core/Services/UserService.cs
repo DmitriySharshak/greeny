@@ -15,35 +15,10 @@ namespace Greeny.Core.Services
         private readonly IDataService _dataService;
         public UserService(IDataService dataService)
         {
-            if(dataService == null) throw  new ArgumentNullException(nameof(dataService));
-
-            _dataService = dataService;
+            _dataService = dataService ?? throw new ArgumentNullException(nameof(dataService));
         }
 
-        public Task<UserModel?> GetAsync(long id)
-        {
-            using (var db = new GreenySchema(_dataService))
-            {
-                return db.User
-                    .Where(q=>q.Id == id)
-                    .Select(q=>Convert(q)).FirstOrDefaultAsync();
-            }
-        }
-
-        public Task<IEnumerable<UserModel>> ListAsync()
-        {
-            return null;
-            //return Task.Run(() =>
-            //{
-            //    return new List<UserModel>()
-            //    {
-            //        new UserModel() { FirstName = "Фамилия 1" },
-            //        new UserModel() { FirstName = "Фамилия 2" }
-            //    };
-            //}).Result;
-        }
-
-        public async Task<UserModel?> GetAsync(string phone, string password)
+        public async Task<UserModel?> GetAsync(string login, string password)
         {
             using (var db = new GreenySchema(_dataService))
             {
@@ -51,7 +26,7 @@ namespace Greeny.Core.Services
 
                 var user = await db.User
                     .Where(q =>
-                        q.PhoneNumber.ToUpper().Equals(phone.ToUpper()) &&
+                        q.PhoneNumber.ToUpper().Equals(login.ToUpper()) &&
                         q.PasswordHash.Equals(passHash))
                     .Select(q => Convert(q)).FirstOrDefaultAsync();
 
@@ -77,15 +52,15 @@ namespace Greeny.Core.Services
             {
                 var id = await db.User.InsertWithIdentityAsync(() => new UserDataModel
                 {
-                    Address = user.Address,
-                    Email = user.Email,
                     FirstName = user.FirstName,
                     LastName = user.LastName,
                     MiddleName = user.MiddleName,
-                    PasswordHash = hash,
-                    IsActive = true,
+                    Email = user.Email,
                     PhoneNumber = user.PhoneNumber,
+                    PasswordHash = hash,
                     RegisterTime = DateTime.UtcNow,
+                    Address = user.Address,
+                    IsActive = true,
                     Type = (int)UserType.Сustomer
                 });
 
@@ -112,15 +87,9 @@ namespace Greeny.Core.Services
             return new UserModel
             {
                 Id = dataModel.Id,
-                Type = (UserType)dataModel.Type,
                 FirstName = dataModel.FirstName,
                 LastName = dataModel.LastName,
                 MiddleName = dataModel.MiddleName,
-                PhoneNumber = dataModel.PhoneNumber,
-                Address = dataModel.Address,
-                Email = dataModel.Email,
-                RegisterTime = dataModel.RegisterTime,
-                IsActive = dataModel.IsActive,
             };
         }
     }

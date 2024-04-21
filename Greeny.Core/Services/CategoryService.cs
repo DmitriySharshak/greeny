@@ -1,8 +1,10 @@
 ﻿using Greeny.Common.Models;
 using Greeny.Core.Contracts;
 using Greeny.Dal;
+using Greeny.Dal.Models;
 using Greeny.Dal.Provider;
 using LinqToDB;
+using System.Collections.Concurrent;
 
 namespace Greeny.Core.Services
 {
@@ -10,50 +12,74 @@ namespace Greeny.Core.Services
     {
         private readonly IDataService _dataService;
         private readonly IFileManagerService _fileManagerService;
-        //private readonly IDistributedCache _cache;
+
+        private static readonly ConcurrentDictionary<int, CategoryHash> _cache = new ConcurrentDictionary<int, CategoryHash>();
         public CategoryService(IDataService dataService, IFileManagerService fileManagerService)
         {
-            if (dataService == null) throw new ArgumentNullException(nameof(dataService));
-
-            _dataService = dataService;
+            _dataService = dataService ?? throw new ArgumentNullException(nameof(dataService));
             _fileManagerService = fileManagerService;
-            //_cache = cache;
         }
 
-        public async Task<IEnumerable<CategoryModel>> GetRootsAsync()
+        public async Task<CategoryHash> GetListAsync(int hash)
         {
             try
             {
-                //var value = await _cache.GetAsync("categoryList");
+                if (_cache.TryGetValue(hash, out var _))
+                {
+                    return null;
+                }
 
-                //if (value != null)
-                //{
-                //    var stream = new MemoryStream(value);
-                //    return await JsonSerializer.DeserializeAsync<IEnumerable<CategoryModel>>(stream);
-                //}
+                if (_cache.Values.Any())
+                {
+                    return _cache.Values.First();
+                }
+
+                int currentHash = 0;
+                var categories = new List<Category>();
 
                 using (var db = new GreenySchema(_dataService))
                 {
-                    var result = db.Category.Where(q => q.ParentId == null && q.Show)
-                        .Select(q => new CategoryModel()
+                    var list = await db.Category.Where(q => q.Show).ToArrayAsync();
+
+                    foreach (var item in list.Where(q => q.ParentId is null))
+                    {
+                        var categoryModel = CategoryDataModelTo(item);
+
+                        currentHash += categoryModel.GetHashCode();
+                        categories.Add(categoryModel);
+
+                        var descendants = list.Where(q => q.ParentId == item.Id).ToArray();
+
+                        if (descendants.Any())
                         {
-                            Id = q.Id,
-                            Name = q.Name,
-                            ParentId = q.ParentId,
-                            Image = _fileManagerService.GetFile(q.ImagePath)
-                        }).ToListAsync();
+                            var subCategories = new List<Category>(descendants.Count());
 
-                    //var valueSerialize = JsonSerializer.Serialize(result);
+                            foreach (var descendant in descendants)
+                            {
+                                var desc = CategoryDataModelTo(descendant);
 
-                    //// сохраняем строковое представление объекта в формате json в кэш на 5 минут
-                    //await _cache.SetStringAsync("categoryList", valueSerialize, new DistributedCacheEntryOptions
-                    //{
-                    //    AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5)
-                    //});
+                                currentHash += categoryModel.GetHashCode();
 
+                                subCategories.Add(desc);
+                            }
 
-                    return await result;
+                            categoryModel.Descendants = subCategories;
+                        }
+                    }
                 }
+
+                var categoryHash = new CategoryHash()
+                {
+                    Hash = currentHash,
+                    List = categories
+                };
+
+                if (!_cache.TryGetValue(currentHash, out var _))
+                {
+                    _cache.TryAdd(currentHash, categoryHash);
+                }
+
+                return categoryHash;
             }
             catch (Exception)
             {
@@ -61,29 +87,19 @@ namespace Greeny.Core.Services
             }
         }
 
-        public async Task<IEnumerable<CategoryModel>> GetDescendantsAsync(long id)
+        private Category CategoryDataModelTo(CategoryDataModel dataModel)
         {
-            try
-            {
-                using (var db = new GreenySchema(_dataService))
-                {
-                    var result = db.Category.Where(q => q.ParentId == id && q.Show)
-                        .Select(q => new CategoryModel()
-                        {
-                            Id = q.Id,
-                            Name = q.Name,
-                            ParentId = q.ParentId,
-                            Image = _fileManagerService.GetFile(q.ImagePath)
-                        }).ToListAsync();
+            var imageBaser64 = _fileManagerService.GetFile(dataModel.ImagePath);
 
-                    return await result;
-                }
-            }
-            catch (Exception)
+            var categoryModel = new Category()
             {
-                throw;
-            }
+                Id = dataModel.Id,
+                Name = dataModel.Name,
+                ImagePath = dataModel.ImagePath,
+                ImageBase64 = imageBaser64,
+            };
+
+            return categoryModel;
         }
-
     }
 }

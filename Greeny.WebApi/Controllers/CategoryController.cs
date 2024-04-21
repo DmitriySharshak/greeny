@@ -1,12 +1,14 @@
 ﻿using Greeny.Common.Models;
 using Greeny.Core.Contracts;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.Mime;
 
 namespace Greeny.WebApi.Controllers
 {
     [ApiController]
-    [Route("api/v1/categories")]
-    [Produces("application/json")]
+    [Route("api/v{version:apiVersion}/categories")]
+    [Produces(MediaTypeNames.Application.Json)]
+    [ApiVersion("1.0")]
     public class CategoryController: ControllerBase
     {
         private readonly ICategoryService _categoryService;
@@ -19,21 +21,10 @@ namespace Greeny.WebApi.Controllers
         /// Получить список корневых категорий товаров
         /// </summary>
         /// <returns></returns>
-        [HttpGet()]
-        public async Task<IEnumerable<CategoryModel>?> GetRoots()
+        [HttpGet("{hash}")]
+        public async Task<CategoryHash?> GetList(int hash)
         {
-            return await _categoryService.GetRootsAsync();
-        }
-
-        /// <summary>
-        /// Получить список потомков для родительской категории 
-        /// </summary>
-        /// <param name="id">Идентификатор родительской категории</param>
-        /// <returns></returns>
-        [HttpGet("{id}/descendants")]
-        public async Task<IEnumerable<CategoryModel>?> GetDescendants(long id)
-        {
-            return await _categoryService.GetDescendantsAsync(id);
+            return await _categoryService.GetListAsync(hash);
         }
     }
 }

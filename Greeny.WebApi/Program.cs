@@ -1,6 +1,7 @@
 using Greeny.WebApi.Extensions;
 using Microsoft.AspNetCore.HttpOverrides;
 using System.Reflection;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Greeny.WebApi
 {
@@ -38,7 +39,14 @@ namespace Greeny.WebApi
             
             var version = builder.Configuration.GetValue<string>("Version");
             Console.WriteLine($"app version: {version}");
-            
+
+            builder.Services.AddApiVersioning(setup =>
+            {
+                setup.DefaultApiVersion = new ApiVersion(1, 0);
+                setup.AssumeDefaultVersionWhenUnspecified = true;
+                setup.ReportApiVersions = true;
+            });
+
             builder.Services
                 .AddCache(builder)
                 .RegisterServices(builder)

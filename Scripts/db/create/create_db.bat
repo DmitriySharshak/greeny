@@ -1,7 +1,7 @@
 @echo off
 if "%1" EQU "" goto BadParams
 
-SET PGHOST=localhost
+SET PGHOST=92.255.79.234
 SET PGPORT=5432
 SET PGUSER=postgres
 SET PGPASSWORD=%1
